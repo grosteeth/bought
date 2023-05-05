@@ -1,0 +1,26 @@
+// For debugging
+template<class SIMD>
+void print_mmxxxi(__mxxxi mm) {
+    typename SIMD::type unpacked[SIMD::numSeqs] __attribute__((aligned(SIMD_REG_SIZE / 8)));
+    _mmxxx_store_si((__mxxxi*)unpacked, mm);
+    for (int i = 0; i < SIMD::numSeqs; i++)
+        printf("%d ", unpacked[i]);
+}
+
+// This structure represents cell in dynamic programming matrix, but only with E and H values.
+struct CellEH {
+    __mxxxi H;
+    __mxxxi E;
+};
+
+/**
+ * @param stopOnOverflow  If true, function will stop when first overflow happens.
+ *            If false, function will not stop but continue with next sequence.
+ *
+ */
+template<class SIMD>
+static int searchDatabaseSW_(unsigned char query[], int queryLength,
+                             unsigned char** db, int dbLength, int dbSeqLengths[],
+                             int gapOpen, int gapExt, int* scoreMatrix, int alphabetLength,
+                             OpalSearchResult* results[], const int searchType, bool calculated[],
+                             int overflowMethod) {
