@@ -1,0 +1,15 @@
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+- (id)initWithFrame:(CGRect)frame textContainer:(NSTextContainer *)textContainer;
+#endif
+
+//uitextview methods
+//need others? use .internalTextView
+- (BOOL)becomeFirstResponder;
+- (BOOL)resignFirstResponder;
+- (BOOL)isFirstResponder;
+
+- (BOOL)hasText;
+- (void)scrollRangeToVisible:(NSRange)range;
+
+// call to force a height change (e.g. after you change max/min lines)
+- (void)refreshHeight;
